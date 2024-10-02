@@ -4,16 +4,16 @@ import Card, { Character } from "./components/Card";
 
 const App = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
-    setLoading(true)
+    setLoading(true);
     const response = await fetch(
       "https://rickandmortyapi.com/api/character/?count=20"
     );
     const data = await response.json()
     setCharacters(data.results)
-    setLoading(false)
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -21,18 +21,21 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <h1>Rick and Morty</h1>
-        {
-          loading 
-          ? <h1>Loading...</h1> 
-          : <div className='cardsList'>
-              {characters.map((character)=>
-              <Card key={character.id} character={character}/>
-              )}
-            </div>
-        }
-    </>
+    <div className="flex justify-center flex-col">
+      <div className="flex justify-center">
+        <h1 className="mb-10 bg-black rounded-md w-fit p-2">Rick and Morty API</h1>
+      </div>
+      <div className="flex justify-center">
+        <h2 className="mb-10 bg-white rounded-md w-fit p-2 text-black">List of characters</h2>
+      </div>
+      {loading ? <h1>Loading...</h1> : (
+        <div className='cardsList'>
+          {characters.map((character)=>
+          <Card key={character.id} character={character}/>
+          )}
+        </div>
+      )}
+    </div>
   );
 };
 

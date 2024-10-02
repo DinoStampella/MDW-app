@@ -1,17 +1,8 @@
-.cardHumanContainer {
+.cardContainer {
     width: 200px;
     padding: 10px;
     border-radius: 5px;
-    border: solid 1px white;
-    background-color: orangered;
-}
-
-.cardAlienContainer {
-    width: 200px;
-    padding: 10px;
-    border-radius: 5px;
-    border: solid 1px white;
-    background-color: greenyellow;
+    border: solid 1px white
 }
 
 .image {
@@ -31,69 +22,121 @@
     margin: 0;
     height: 50px;
     text-align: start;
+    font-weight: 700;
 }
+
+.male {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    height: 50px;
+    text-align: start;
+    height: fit-content;
+    background-color: royalblue;
+    padding-inline: 6px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.female {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    height: 50px;
+    text-align: start;
+    color: white;
+    height: fit-content;
+    background-color: rgb(255, 0, 225);
+    padding-inline: 6px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
 
 .propertyName {
     display: flex;
     font-weight: 700;
     align-items: center;
     margin: 0;
-    height: 50px;
-    text-align: start;
+    padding: 10px;
 }
 
-.propertyAlive {
+.propertyStatus {
     display: flex;
     font-weight: 700;
     font-size: 12px;
-    color: blue;
+    color: white;
     align-items: center;
     margin: 0;
     height: 50px;
     text-align: start;
+    height: fit-content;
+    background-color: green;
+    padding-inline: 6px;
+    border-radius: 5px;
 }
 
-.propertyDead {
+.propertyStatusDead {
     display: flex;
     font-weight: 700;
     font-size: 12px;
-    color: red;
+    color: white;
     align-items: center;
     margin: 0;
     height: 50px;
     text-align: start;
+    height: fit-content;
+    background-color: black;
+    padding-inline: 6px;
+    border-radius: 5px;
 }
 
-.propertyUnknown {
+.propertyStatusUnknown {
     display: flex;
     font-weight: 700;
     font-size: 12px;
-    color: gray;
+    color: white;
     align-items: center;
     margin: 0;
     height: 50px;
     text-align: start;
+    height: fit-content;
+    background-color: grey;
+    padding-inline: 6px;
+    border-radius: 5px;
+    border: 1px solid black
 }
 
-.propertiesContainerStart {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    width: 50%;
-}
 
-.propertiesContainerEnd {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    width: 50%;
-}
-
-.propertyLocation {
+.nameContainer {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin: 0;
-    height: 50px;
     width: 100%;
+    border-bottom: solid 1px white;
+    margin-bottom: 10px;
+}
+
+.genderAndStatus {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.cardHumanContainer {
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    border: solid 1px orangered;
+    background-color: brown;
+}
+
+.cardAlienContainer {
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+    border: solid 1px yellow;
+    background-color: olivedrab;
 }

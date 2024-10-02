@@ -1,4 +1,5 @@
 import styles from "./styles.module.css";
+
 interface Location {
   name: string;
 }
@@ -11,38 +12,50 @@ export interface Character {
   gender: string;
   species: string;
   location: Location;
+  url: string;
 }
 
-enum Specie {
+enum Gender {
+  MALE =  'Male',
+  FEMALE = 'Female'
+}
+
+enum Species {
   HUMAN = 'Human',
   ALIEN = 'Alien'
 }
 
-interface StatusType {
-  [key: string]: string
-}
+interface StatusTypes {
+  [key: string]: string;
+};
 
-const PropertyCheckStatus: StatusType = {
-  Alive: styles.propertyAlive,
-  Dead: styles.propertyDead,
-  unknown: styles.propertyUnknown,
+const PropertyCheckStatus: StatusTypes = {
+  Alive: styles.propertyStatus,
+  Dead: styles.propertyStatusDead,
+  unknown: styles.propertyStatusUnknown,
 }
 
 const Card = ({character}: {character: Character}) => {
-  const isHuman = character.species === Specie.HUMAN
+
+  const isMale = character.gender === Gender.MALE;
+
+  const isHuman = character.species === Species.HUMAN;
+
   return (
-    <div className={isHuman ? styles.cardHumanContainer : styles.cardAlienContainer }>
-        <img src={character.image} alt={character.name} className={styles.image} />
-        <div className={styles.properties}>
-            <div className={styles.propertiesContainerStart}>
-                <p className={styles.propertyName}>{character.name}</p>
-                <p className={PropertyCheckStatus[character.status]}>{character.status}</p>
-            </div>
-            <div className={styles.propertiesContainerEnd}>
-                <p className="flex items-center m-0 h-[50px] text-start">{character.gender}</p>
-            </div>
-            <p className={styles.propertyLocation}>{character.location.name}</p>
-        </div>
+    <div className={isHuman ? styles.cardHumanContainer : styles.cardAlienContainer}>
+      <div className={styles.nameContainer}>
+        <a href={`${character.url}`} className="no-underline text-inherit">
+          <p className={styles.propertyName}>{character.name}</p>
+        </a>
+      </div>
+      <img src={character.image} alt={character.name} className="w-full rounded-[5px] lg:rounded-[5px]" />
+      <div className={styles.properties}>
+          <div className={styles.genderAndStatus}>
+              <p className={isMale ? styles.male : styles.female}>{character.gender}</p>
+              <p className={PropertyCheckStatus[character.status]}>{character.status}</p>
+          </div>
+          <p className="flex justify-center items-center m-auto mt-2 text-yellow-400 font-semibold p-1 text-sm h-fit w-fit">{character.location.name}</p>
+      </div>
     </div>
   );
 };
