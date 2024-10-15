@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 
 interface Location {
@@ -44,9 +45,9 @@ const Card = ({character}: {character: Character}) => {
   return (
     <div className={isHuman ? styles.cardHumanContainer : styles.cardAlienContainer}>
       <div className={styles.nameContainer}>
-        <a href={`${character.url}`} className="no-underline text-inherit">
+        <Link to={`${character.id}`} className="no-underline text-inherit">
           <p className={styles.propertyName}>{character.name}</p>
-        </a>
+        </Link>
       </div>
       <img src={character.image} alt={character.name} className="w-full rounded-[5px] lg:rounded-[5px]" />
       <div className={styles.properties}>

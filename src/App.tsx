@@ -1,42 +1,22 @@
-import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
-import Card, { Character } from "./components/Card";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Characters from "./pages/Characters";
+import Character from "./pages/Character";
 
 const App = () => {
-  const [characters, setCharacters] = useState<Character[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  const fetchData = async () => {
-    setLoading(true);
-    const response = await fetch(
-      "https://rickandmortyapi.com/api/character/?count=20"
-    );
-    const data = await response.json()
-    setCharacters(data.results)
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchData()
-  }, []);
-
   return (
-    <div className="flex justify-center flex-col">
-      <div className="flex justify-center">
-        <h1 className="mb-10 bg-black rounded-md w-fit p-2">Rick and Morty API</h1>
-      </div>
-      <div className="flex justify-center">
-        <h2 className="mb-10 bg-white rounded-md w-fit p-2 text-black">List of characters</h2>
-      </div>
-      {loading ? <h1>Loading...</h1> : (
-        <div className='cardsList'>
-          {characters.map((character)=>
-          <Card key={character.id} character={character}/>
-          )}
-        </div>
-      )}
-    </div>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>} />
+        <Route path="/about" element={<About/>} />
+        <Route path="/characters" element={<Characters/>} />
+        <Route path="/characters/:id" element={<Character/>} />
+        <Route path="*" element={<Navigate to='/'/>} />
+      </Routes>
+    </BrowserRouter>
+  )
 };
 
 export default App;
