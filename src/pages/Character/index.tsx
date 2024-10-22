@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../../App.css";
 import  { Character as CharacterType } from "../../components/Card";
 import { useNavigate, useParams } from "react-router-dom";
+import SingoutButton from "../../components/SignoutButton";
 
 const Character = () => {
   const [character, setCharacter] = useState<CharacterType>();
@@ -28,6 +29,8 @@ const Character = () => {
   return (
     loading ? <h1>Is loading</h1> : (
         <div>
+                <SingoutButton/>
+
             <h1>{character?.name}</h1>
             <p>{character?.status}</p>
             <img src={character?.image} alt={character?.name} />
