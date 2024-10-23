@@ -36,7 +36,7 @@ const PropertyCheckStatus: StatusTypes = {
   unknown: styles.propertyStatusUnknown,
 }
 
-const Card = ({character}: {character: Character}) => {
+const Card = ({ character}: {character: Character}) => {
 
   const isMale = character.gender === Gender.MALE;
 
