@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "./config/firebase";
+import Layout from "./components/Layout";
 
 const App = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -24,36 +25,38 @@ const App = () => {
         return;
       }
       setUser(null);
-      localStorage.removeItem("token")
+      localStorage.removeItem("token");
     });
     return () => unsubscribe();
   }, []);
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/about" element={<About />} />
-        <Route
-          path="/characters"
-          element={
-            <ProtectedRoute user={user}>
-              <Characters />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/characters/:id"
-          element={
-            <ProtectedRoute user={user}>
-              <Character />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="/characters"
+            element={
+              <ProtectedRoute user={user}>
+                <Characters />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/characters/:id"
+            element={
+              <ProtectedRoute user={user}>
+                <Character />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 };
