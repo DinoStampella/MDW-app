@@ -19,7 +19,10 @@ const Header = () => {
             <li
               key={item.title}
               onClick={() => handleClick(item.link)}
-              className={path === item.link ? "underline" : ""}
+              className={
+                (path === item.link ? "underline font-bold" : "") +
+                " cursor-pointer"
+              }
             >
               {item.title}
             </li>
