@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "./config/firebase";
+import Layout from "./components/Layout";
 
 const App = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -31,6 +32,7 @@ const App = () => {
 
   return (
     <BrowserRouter>
+    <Layout>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
@@ -43,7 +45,7 @@ const App = () => {
               <Characters />
             </ProtectedRoute>
           }
-        />
+          />
         <Route
           path="/characters/:id"
           element={
@@ -51,9 +53,10 @@ const App = () => {
               <Character />
             </ProtectedRoute>
           }
-        />
+          />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+          </Layout>
     </BrowserRouter>
   );
 };
