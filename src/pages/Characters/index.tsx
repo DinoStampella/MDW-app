@@ -1,49 +1,49 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "../../App.css";
-import Card, { Character } from "../../components/Card";
+import Card from "../../components/Card";
 import { useNavigate } from "react-router-dom";
 import SignOutButton from "../../components/SignOutButton";
+import { useDispatch, useSelector } from "../../store/store";
+import { getCharacters } from "../../slices/characters";
 
 const Characters = () => {
-  const [characters, setCharacters] = useState<Character[]>([]);
-  const [loading, setLoading] = useState(false);
+
+  const { list, loading } = useSelector((state) => state.reducer.characters)
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const fetchData = async () => {
-    setLoading(true);
-    const response = await fetch(
-      "https://rickandmortyapi.com/api/character/?count=20"
-    );
-    const data = await response.json();
-    setCharacters(data.results);
-    setLoading(false);
-  };
-  const token = localStorage.getItem("token")
+  // const token = localStorage.getItem("token")
 
-  const fetchProductById = async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:4000/products/66ce66b9ac4a442e5b3d66a9",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization:
-              `Bearer ${token}`,
-          },
-        }
-      );
-      console.log("fetchProductById", response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
+  // How to call local api
+  
+  // const fetchProductById = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "http://localhost:4000/products/66ce66b9ac4a442e5b3d66a9",
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization:
+  //             `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     console.log("fetchProductById", response);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   useEffect(() => {
-    fetchData();
-    fetchProductById();
-  }, []);
+    if(!list.length){
+      dispatch(getCharacters());
+    }
+    // fetchProductById();
+  }, [dispatch, list]);
 
   return (
     <div className="flex justify-center flex-col">
@@ -62,7 +62,7 @@ const Characters = () => {
         <h1>Loading...</h1>
       ) : (
         <div className="cardsList">
-          {characters.map((character) => (
+          {list.map((character) => (
             <Card key={character.id} character={character} />
           ))}
         </div>
