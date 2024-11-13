@@ -14,9 +14,6 @@ const About = () => {
         }
       }, [dispatch, list]);
 
-      console.log('list', list)
-      console.log('loading', loading)
-
     return (
         <>
         <h1>About</h1>

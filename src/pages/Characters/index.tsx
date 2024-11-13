@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import SignOutButton from "../../components/SignOutButton";
 import { useDispatch, useSelector } from "../../store/store";
 import { getCharacters } from "../../slices/characters";
+import api from "../../config/axios";
 
 const Characters = () => {
 
@@ -14,10 +15,8 @@ const Characters = () => {
 
   const navigate = useNavigate();
 
-  // const token = localStorage.getItem("token")
-
-
   // How to call local api
+  // const token = localStorage.getItem("token")
   
   // const fetchProductById = async () => {
   //   try {
@@ -37,6 +36,15 @@ const Characters = () => {
   //     console.error(error);
   //   }
   // };
+
+  const getProducts = async () => {
+    try {
+      const response = await api.get('/products')
+      console.log('response', response.data.data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   useEffect(() => {
     if(!list.length){
@@ -68,6 +76,7 @@ const Characters = () => {
         </div>
       )}
       <button onClick={() => navigate("/")}>Go to Home</button>
+      <button onClick={getProducts}>Get Products</button>
     </div>
   );
 };
